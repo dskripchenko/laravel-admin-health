@@ -1,14 +1,27 @@
 {
     "name": "dskripchenko/laravel-admin-health",
     "description": "Health-checks dashboard для dskripchenko/laravel-admin (свои чекеры, без spatie/laravel-health).",
-    "license": "MIT",
     "type": "library",
+    "keywords": [
+        "laravel",
+        "admin",
+        "health-check",
+        "monitoring",
+        "observability",
+        "dskripchenko"
+    ],
+    "homepage": "https://github.com/dskripchenko/laravel-admin-health",
+    "license": "MIT",
     "authors": [
         {
             "name": "Denis Skripchenko",
             "email": "denskrp90@gmail.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/dskripchenko/laravel-admin-health/issues",
+        "source": "https://github.com/dskripchenko/laravel-admin-health"
+    },
     "require": {
         "php": "^8.5",
         "dskripchenko/laravel-admin": "^1.0"
@@ -35,11 +48,14 @@
             "providers": [
                 "Dskripchenko\\LaravelAdminHealth\\AdminHealthServiceProvider"
             ]
+        },
+        "branch-alias": {
+            "dev-main": "1.x-dev"
         }
     },
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
