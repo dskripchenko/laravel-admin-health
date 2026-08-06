@@ -1,11 +1,11 @@
 # dskripchenko/laravel-admin-health
 
-> 🌐 [English](README.md) · **Русский** · [Deutsch](README.de.md) · [中文](README.zh.md)
+> 🌐 [English](../../README.md) · **Русский** · [Deutsch](../de/README.md) · [中文](../zh/README.md)
 
 
 Health-checks dashboard для `dskripchenko/laravel-admin`. Своя реализация без `spatie/laravel-health`.
 
-Полная спецификация: [../../docs/sister-packs/health.md](../../docs/sister-packs/health.md).
+Полная спецификация: [laravel-admin/docs/sister-packs/health.md](https://github.com/dskripchenko/laravel-admin/blob/main/docs/sister-packs/health.md).
 
 ## Статус
 

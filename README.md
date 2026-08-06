@@ -1,6 +1,6 @@
 # dskripchenko/laravel-admin-health
 
-> 🌐 **English** · [Русский](README.ru.md) · [Deutsch](README.de.md) · [中文](README.zh.md)
+> 🌐 **English** · [Русский](docs/ru/README.md) · [Deutsch](docs/de/README.md) · [中文](docs/zh/README.md)
 
 Health-checks dashboard. Own implementation without spatie/laravel-health. Built-in checkers: Database, Cache, Queue, Storage, Schedule, Disk-space, OPcache, plus a contract for custom checks.
 
