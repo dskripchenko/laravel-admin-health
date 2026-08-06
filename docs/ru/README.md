@@ -5,7 +5,7 @@
 
 Health-checks dashboard для `dskripchenko/laravel-admin`. Своя реализация без `spatie/laravel-health`.
 
-Полная спецификация: [laravel-admin/docs/sister-packs/health.md](https://github.com/dskripchenko/laravel-admin/blob/main/docs/sister-packs/health.md).
+Полная спецификация: [laravel-admin/docs/ru/sister-packs/health.md](https://github.com/dskripchenko/laravel-admin/blob/main/docs/ru/sister-packs/health.md).
 
 ## Статус
 
