@@ -1,6 +1,6 @@
 {
     "name": "dskripchenko/laravel-admin-health",
-    "description": "Health-checks dashboard для dskripchenko/laravel-admin (свои чекеры, без spatie/laravel-health).",
+    "description": "Health-check dashboard for dskripchenko/laravel-admin — its own checkers, no dependency on spatie/laravel-health.",
     "type": "library",
     "keywords": [
         "laravel",
