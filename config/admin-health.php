@@ -10,12 +10,12 @@ use Dskripchenko\LaravelAdminHealth\Checks\QueueCheck;
 return [
     /*
     |--------------------------------------------------------------------------
-    | Зарегистрированные check'и
+    | The registered checks
     |--------------------------------------------------------------------------
-    | Каждый ключ — class-string<HealthCheck>. Значение — config-array,
-    | который будет передан в конструктор check'а как `$config`-параметр.
-    | Для добавления собственного check'а: реализуйте HealthCheck contract,
-    | добавьте class в массив + config'и параметрами.
+    | Every key is a class-string<HealthCheck>. The value is the config array
+    | passed into the check's constructor as the `$config` parameter. To add a
+    | check of your own: implement the HealthCheck contract, then add the class
+    | to the array together with its config.
     */
 
     'checks' => [
@@ -51,20 +51,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | TTL истории результатов (дней)
+    | The TTL of the results history (in days)
     |--------------------------------------------------------------------------
-    | Cleanup-команда удалит записи старше этого порога. Используется
-    | `admin:health:cleanup` (запускайте раз в сутки в scheduler).
+    | The cleanup command deletes the rows older than this threshold. It is
+    | `admin:health:cleanup` (run it once a day from the scheduler).
     */
 
     'history_days' => 7,
 
     /*
     |--------------------------------------------------------------------------
-    | Topbar-индикатор
+    | The topbar indicator
     |--------------------------------------------------------------------------
-    | Если true — UI добавляет в topbar мини-кружок со сводным статусом
-    | (на frontend'е реализуется отдельным компонентом).
+    | When true the UI adds a small circle with the summary status to the
+    | topbar (implemented on the frontend by a separate component).
     */
 
     'topbar_indicator' => true,
