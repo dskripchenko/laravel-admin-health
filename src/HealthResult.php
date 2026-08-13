@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Dskripchenko\LaravelAdminHealth;
 
 /**
- * Результат одного запуска check'а.
+ * The result of a single run of a check.
  *
- * Иммутабельный value-object. Создаётся через factories ok/warning/failing.
+ * An immutable value object. Created through the ok/warning/failing factories.
  *
  * @phpstan-type HealthStatus 'ok'|'warning'|'failing'
  */

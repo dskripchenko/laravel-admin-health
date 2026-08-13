@@ -10,11 +10,11 @@ use Dskripchenko\LaravelAdminHealth\HealthResult;
 use Throwable;
 
 /**
- * Custom check через closure. Используется для one-off проверок, для
- * которых не стоит писать отдельный класс.
+ * A custom check through a closure. Used for one-off checks that are not worth a
+ * class of their own.
  *
- * Closure возвращает HealthResult либо bool (true=ok, false=failing).
- * Throwable от closure → failing с message от exception'а.
+ * The closure returns a HealthResult or a bool (true=ok, false=failing). A
+ * Throwable from the closure becomes failing with the exception's message.
  */
 final class ClosureCheck implements HealthCheck
 {

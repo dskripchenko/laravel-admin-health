@@ -8,10 +8,10 @@ use Dskripchenko\LaravelAdminHealth\HealthCheck;
 use Dskripchenko\LaravelAdminHealth\HealthResult;
 
 /**
- * Свободное место на disks (warning при <X%, failing при <Y%).
+ * The free space on the disks (a warning below X%, failing below Y%).
  *
- * Использует disk_free_space + disk_total_space против root каждого
- * filesystem-disk'а (читает из storage/app/{disk-name} либо public_path).
+ * It uses disk_free_space and disk_total_space against the root of every
+ * filesystem disk (reading storage/app/{disk-name} or public_path).
  */
 final class DiskSpaceCheck implements HealthCheck
 {

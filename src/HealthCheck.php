@@ -5,19 +5,20 @@ declare(strict_types=1);
 namespace Dskripchenko\LaravelAdminHealth;
 
 /**
- * Контракт single-check'а.
+ * The contract of a single check.
  *
- * Каждый check декларирует:
- *   - id() — уникальный slug ('database.default', 'queue.imports')
- *   - name() — human-readable («Соединение с БД»)
- *   - category() — для группировки в UI (database / cache / queue / storage / custom)
- *   - frequency() — '1m' | '5m' | '15m' | '1h' — определяет когда runner
- *     должен снова запустить
- *   - timeout() — секунды (runner abort'ит если check висит)
- *   - run() — собственно проверка, возвращает HealthResult.
+ * Every check declares:
+ *   - id() — a unique slug ('database.default', 'queue.imports')
+ *   - name() — a human-readable one ("The database connection")
+ *   - category() — for the grouping in the UI (database / cache / queue /
+ *     storage / custom)
+ *   - frequency() — '1m' | '5m' | '15m' | '1h' — it decides when the runner
+ *     should run it again
+ *   - timeout() — in seconds (the runner aborts a check that hangs)
+ *   - run() — the check itself, returning a HealthResult.
  *
- * Сами check'и stateless — никаких полей. State (last_run, status) лежит
- * в admin_health_results-таблице, обновляется runner'ом.
+ * The checks themselves are stateless — no fields at all. The state (last_run,
+ * status) lives in the admin_health_results table and is updated by the runner.
  */
 interface HealthCheck
 {

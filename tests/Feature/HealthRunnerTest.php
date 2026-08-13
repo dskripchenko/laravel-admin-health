@@ -23,8 +23,9 @@ final class HealthRunnerTest extends TestCase
         $okCheck = new ClosureCheck('test.ok', 'OK', fn () => true);
         $warningCheck = new ClosureCheck('test.warn', 'Warn', fn () => HealthResult::warning('high'));
 
-        // ClosureCheck требует closure в конструкторе → не через class-string.
-        // In-place reflective set checks-property (только в тестах).
+        // ClosureCheck needs a closure in its constructor, so it cannot go
+        // through a class-string. We set the checks property reflectively in
+        // place (in the tests only).
         $reflection = new \ReflectionClass($registry);
         $property = $reflection->getProperty('checks');
         $property->setValue($registry, [
@@ -65,11 +66,11 @@ final class HealthRunnerTest extends TestCase
 
         /** @var HealthRunner $runner */
         $runner = $this->app->make(HealthRunner::class);
-        // Первый run — нет previous → no event
+        // The first run has no previous one, so there is no event
         $runner->runOne($check);
         Event::assertNotDispatched(HealthCheckStatusChanged::class);
 
-        // Подменяем closure на ok → status change → event
+        // We swap the closure for an ok one → a status change → an event
         $okCheck = new ClosureCheck('change.test', 'Change', fn () => HealthResult::ok());
         $runner->runOne($okCheck);
         Event::assertDispatched(HealthCheckStatusChanged::class);
@@ -77,7 +78,7 @@ final class HealthRunnerTest extends TestCase
 
     public function test_cleanup_deletes_old_records(): void
     {
-        // Создаём запись 10 дней назад
+        // Create a row dated ten days back
         HealthResultRecord::query()->create([
             'check_id' => 'old',
             'status' => 'ok',

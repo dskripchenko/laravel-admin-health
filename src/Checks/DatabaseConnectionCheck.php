@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Throwable;
 
 /**
- * Проверяет каждое DB-подключение из config['connections'] через попытку
- * получить PDO-инстанс. Failing если хотя бы одно недоступно.
+ * Checks every database connection from config['connections'] by trying to get a
+ * PDO instance. Failing when at least one is unreachable.
  */
 final class DatabaseConnectionCheck implements HealthCheck
 {

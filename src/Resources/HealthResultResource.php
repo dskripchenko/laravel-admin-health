@@ -12,9 +12,9 @@ use Dskripchenko\LaravelAdminHealth\Models\HealthResultRecord;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Resource для просмотра истории health-check'ов.
+ * A resource for browsing the history of the health checks.
  *
- * Read-only: list + view, без create/update. Latest first.
+ * Read-only: list plus view, with no create/update. Latest first.
  *
  * Permissions:
  *   - admin.system.health.view

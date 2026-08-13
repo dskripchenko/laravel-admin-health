@@ -7,11 +7,12 @@ namespace Dskripchenko\LaravelAdminHealth;
 use Illuminate\Contracts\Container\Container;
 
 /**
- * Реестр зарегистрированных HealthCheck'ов.
+ * The registry of the registered health checks.
  *
- * Заполняется ServiceProvider'ом из `config('admin-health.checks')`. Каждый
- * элемент — class-string + config-array. Регистрация eager: instance
- * создаётся в register() через container->make($class, ['config' => $config]).
+ * It is filled by the service provider from `config('admin-health.checks')`.
+ * Every element is a class-string plus a config array. The registration is
+ * eager: the instance is created in register() through
+ * container->make($class, ['config' => $config]).
  */
 final class HealthRegistry
 {

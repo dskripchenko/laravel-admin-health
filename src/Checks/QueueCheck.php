@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Queue;
 use Throwable;
 
 /**
- * Длина каждой очереди (warning/failing по threshold) + счётчик failed_jobs.
+ * The length of every queue (warning/failing by threshold) plus the failed_jobs
+ * counter.
  */
 final class QueueCheck implements HealthCheck
 {
@@ -83,7 +84,7 @@ final class QueueCheck implements HealthCheck
         try {
             $failedCount = (int) DB::table('failed_jobs')->count();
         } catch (Throwable) {
-            // failed_jobs table может не существовать в some setups — игнорируем.
+            // The failed_jobs table may be absent in some setups — we ignore that.
         }
 
         $meta = ['depths' => $depths, 'failed_jobs_total' => $failedCount];

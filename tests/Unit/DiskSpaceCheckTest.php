@@ -11,10 +11,10 @@ final class DiskSpaceCheckTest extends TestCase
 {
     public function test_existing_path_returns_ok(): void
     {
-        // /tmp всегда существует, и место там обычно > 5%
+        // /tmp always exists, and there is usually more than 5% free there
         $check = new DiskSpaceCheck(['paths' => ['/tmp']]);
         $r = $check->run();
-        // Не failing/warning при разумном fail/warn threshold
+        // Neither failing nor warning with a sensible fail/warn threshold
         $this->assertContains($r->status, ['ok', 'warning']);
         $this->assertArrayHasKey('paths', $r->meta);
     }

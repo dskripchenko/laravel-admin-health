@@ -10,8 +10,8 @@ use Illuminate\Console\Command;
 /**
  * `php artisan admin:health:cleanup`
  *
- * Удаляет старые записи из `admin_health_results` (TTL из config). Запускать
- * раз в сутки в scheduler.
+ * Deletes the old rows from `admin_health_results` (the TTL comes from the
+ * config). Run it once a day from the scheduler.
  */
 final class CleanupHealthResultsCommand extends Command
 {

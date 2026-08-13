@@ -10,10 +10,11 @@ use Illuminate\Console\Command;
 /**
  * `php artisan admin:health:run`
  *
- * Запускает все зарегистрированные health-check'и, сохраняет результаты в
- * `admin_health_results`, эмитит HealthCheckStatusChanged при смене статуса.
+ * Runs every registered health check, saves the results into
+ * `admin_health_results` and emits HealthCheckStatusChanged when a status
+ * changes.
  *
- * Используется в scheduler:
+ * Used from the scheduler:
  *   $schedule->command('admin:health:run')->everyMinute()->withoutOverlapping();
  */
 final class RunHealthChecksCommand extends Command
@@ -41,8 +42,9 @@ final class RunHealthChecksCommand extends Command
             } elseif ($status === 'warning') {
                 $this->warn($line);
             } else {
-                // 'failing' — единственный остающийся вариант из union-type
-                // HealthResult::$status. PHPStan-уверен в exhaustiveness.
+                // 'failing' is the only remaining option of the
+                // HealthResult::$status union type. PHPStan is sure of the
+                // exhaustiveness.
                 $this->error($line);
                 $hasFail = true;
             }

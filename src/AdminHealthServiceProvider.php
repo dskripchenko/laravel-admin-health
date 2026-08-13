@@ -10,14 +10,14 @@ use Dskripchenko\LaravelAdminHealth\Console\RunHealthChecksCommand;
 use Illuminate\Support\ServiceProvider;
 
 /**
- * Service provider пакета.
+ * The package's service provider.
  *
  * - mergeConfigFrom — admin-health.php
- * - bind HealthRegistry, HealthRunner singletons
- * - регистрирует checks из config('admin-health.checks') в HealthRegistry
- *   на boot()-фазе
- * - регистрирует AdminHealthPlugin в config('admin.plugins')
- * - подключает миграции, артизан-команды
+ * - binds the HealthRegistry and HealthRunner singletons
+ * - registers the checks from config('admin-health.checks') in the
+ *   HealthRegistry during the boot() phase
+ * - registers AdminHealthPlugin in config('admin.plugins')
+ * - wires in the migrations and the artisan commands
  */
 final class AdminHealthServiceProvider extends ServiceProvider
 {
@@ -52,8 +52,8 @@ final class AdminHealthServiceProvider extends ServiceProvider
     }
 
     /**
-     * Считывает config('admin-health.checks') и регистрирует каждый class
-     * в HealthRegistry с переданным config-array.
+     * Reads config('admin-health.checks') and registers every class in the
+     * HealthRegistry with the config array it was given.
      */
     private function registerHealthChecks(): void
     {

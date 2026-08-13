@@ -9,9 +9,9 @@ use Dskripchenko\LaravelAdminHealth\HealthResult;
 use Illuminate\Foundation\Events\Dispatchable;
 
 /**
- * Эмитится runner'ом при переходе ok ↔ warning/failing.
+ * Emitted by the runner on an ok ↔ warning/failing transition.
  *
- * Host подписывается через EventServiceProvider:
+ * A host subscribes through its EventServiceProvider:
  *
  *     Event::listen(HealthCheckStatusChanged::class, function ($e) {
  *         if ($e->isFailing()) {

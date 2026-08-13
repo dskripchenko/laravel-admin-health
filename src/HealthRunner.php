@@ -10,12 +10,13 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Carbon;
 
 /**
- * Запускает зарегистрированные HealthCheck'и + persist'ит результаты.
+ * Runs the registered health checks and persists the results.
  *
- * Не считает frequency сам — runner всегда выполняет ВСЕ check'и; respect'ить
- * `frequency()` должен caller (scheduler с cron-like интервалом).
+ * It does not track the frequency itself — the runner always performs ALL of the
+ * checks; respecting `frequency()` is the caller's job (a scheduler with a
+ * cron-like interval).
  *
- * При смене статуса (ok → failing/warning или обратно) эмитит
+ * On a status change (ok → failing/warning or back) it emits the
  * HealthCheckStatusChanged event.
  */
 final class HealthRunner
@@ -26,7 +27,7 @@ final class HealthRunner
     ) {}
 
     /**
-     * Запустить все check'и.
+     * Run every check.
      *
      * @return list<array{check: HealthCheck, result: HealthResult, duration_ms: int}>
      */
@@ -42,7 +43,7 @@ final class HealthRunner
     }
 
     /**
-     * Запустить один check + сохранить результат.
+     * Run a single check and save the result.
      *
      * @return array{check: HealthCheck, result: HealthResult, duration_ms: int}
      */
@@ -71,7 +72,7 @@ final class HealthRunner
     }
 
     /**
-     * Получить последний статус (или null если ещё ни разу не запускали).
+     * Get the latest status (or null when it has never been run).
      */
     public function lastStatusFor(string $checkId): ?string
     {
@@ -96,7 +97,7 @@ final class HealthRunner
     }
 
     /**
-     * Удалить старые результаты — чистим раз в сутки.
+     * Delete the old results — the cleanup runs once a day.
      */
     public function cleanupOlderThan(int $days): int
     {

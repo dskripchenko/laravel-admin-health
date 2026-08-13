@@ -7,10 +7,10 @@ namespace Dskripchenko\LaravelAdminHealth\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Eloquent-обёртка над `admin_health_results`.
+ * An Eloquent wrapper over `admin_health_results`.
  *
- * Persistent state для health-check runner'а: каждая строка — один запуск
- * single check'а с его результатом + duration.
+ * The persistent state of the health-check runner: every row is one run of a
+ * single check with its result and its duration.
  *
  * @property int $id
  * @property string $check_id
