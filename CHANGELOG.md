@@ -8,6 +8,40 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 Entries for releases published before this file existed were reconstructed from
 the tagged commit history.
 
+## [v1.4.0] - 2026-08-17
+
+### Added
+- **The status indicator in the top bar** — the surface the pack was specified
+  with and shipped without. Until now the checks answered only when someone
+  remembered to open their section, which is the opposite of what a health check
+  is for. A dot appears the moment something fails, on every page of the panel,
+  and nothing at all is drawn while every check passes. The `topbar_indicator`
+  config flag, which had described a component that did not exist, now means
+  something.
+- **A dashboard card** with the counts per state. "Never run" gets a card of its
+  own only when it happens: a check registered and never executed almost always
+  means the scheduler was never wired up.
+- **`HealthSummary`** — the latest result of every check, from one query, cached
+  for a few seconds and dropped after every run. Both surfaces read it, so the
+  header and the dashboard cannot disagree.
+
+### Changed
+- Requires `dskripchenko/laravel-admin` ^1.30 — the release that added the
+  status-indicator contract and a reader for the widget registry.
+
+### Fixed
+- **The documentation described an API that never existed**: a
+  `Contracts\HealthCheck` with `key()`/`check()`, `HealthResult::failed()`, a
+  `config/health.php` with `checkers`, a `--tag=health-config`, and seven
+  built-in checkers of which three were never written. Rewritten against the
+  code: `HealthCheck` with `id()`/`run()`, `config/admin-health.php`,
+  `--tag=admin-health-config`, and the four checks that actually ship. The
+  getting-started page also never mentioned that nothing runs the checks without
+  a scheduler entry.
+- `HealthCheck::timeout()` claimed the runner aborts a check that hangs. It does
+  not — PHP cannot be interrupted mid-call — and the docblock now says what the
+  number is really for.
+
 ## [v1.3.0] - 2026-07-20
 
 ### Changed

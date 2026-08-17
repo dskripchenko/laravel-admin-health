@@ -63,8 +63,10 @@ return [
     |--------------------------------------------------------------------------
     | The topbar indicator
     |--------------------------------------------------------------------------
-    | When true the UI adds a small circle with the summary status to the
-    | topbar (implemented on the frontend by a separate component).
+    | When true the panel shows the overall status in its top bar — a dot with
+    | a word, on every page, and nothing at all while every check passes.
+    | Requires dskripchenko/laravel-admin ^1.30; on anything older the flag has
+    | no effect, since there was nowhere to put the indicator.
     */
 
     'topbar_indicator' => true,

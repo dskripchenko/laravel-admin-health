@@ -2,7 +2,13 @@
 
 > 🌐 **English** · [Русский](docs/ru/README.md) · [Deutsch](docs/de/README.md) · [中文](docs/zh/README.md)
 
-Health-checks dashboard. Own implementation without spatie/laravel-health. Built-in checkers: Database, Cache, Queue, Storage, Schedule, Disk-space, OPcache, plus a contract for custom checks.
+Health-checks for the admin panel. Its own implementation, with no dependency on
+spatie/laravel-health. Built-in checks: database connection, cache, queue depth
+and disk space, plus a closure check and a contract for your own.
+
+The state reaches you rather than waiting to be looked up: a dot in the top bar
+the moment something fails, a counts card on the dashboard, and the full history
+in its own section.
 
 A sister-pack for [`dskripchenko/laravel-admin`](https://github.com/dskripchenko/laravel-admin).
 
@@ -16,11 +22,19 @@ composer require dskripchenko/laravel-admin-health
 php artisan migrate
 ```
 
+Nothing runs the checks by itself — add the runner to the scheduler:
+
+```php
+// routes/console.php
+Schedule::command('admin:health:run')->everyMinute();
+Schedule::command('admin:health:cleanup')->daily();
+```
+
 The plugin auto-registers via Laravel package discovery. To publish the
 config:
 
 ```bash
-php artisan vendor:publish --tag=health-config
+php artisan vendor:publish --tag=admin-health-config
 ```
 
 ## Documentation

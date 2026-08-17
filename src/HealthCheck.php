@@ -14,7 +14,10 @@ namespace Dskripchenko\LaravelAdminHealth;
  *     storage / custom)
  *   - frequency() — '1m' | '5m' | '15m' | '1h' — it decides when the runner
  *     should run it again
- *   - timeout() — in seconds (the runner aborts a check that hangs)
+ *   - timeout() — in seconds, declared rather than enforced: the runner has no
+ *     way to interrupt arbitrary PHP mid-call, so the number is for the check
+ *     itself to hand to whatever client it uses (a HTTP timeout, a connection
+ *     timeout). A check that ignores its own timeout() will hang the run
  *   - run() — the check itself, returning a HealthResult.
  *
  * The checks themselves are stateless — no fields at all. The state (last_run,

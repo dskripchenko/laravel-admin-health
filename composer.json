@@ -24,7 +24,7 @@
     },
     "require": {
         "php": "^8.2",
-        "dskripchenko/laravel-admin": "^1.7"
+        "dskripchenko/laravel-admin": "^1.30"
     },
     "require-dev": {
         "larastan/larastan": "^3.0",

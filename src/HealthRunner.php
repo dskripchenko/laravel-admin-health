@@ -24,6 +24,7 @@ final class HealthRunner
     public function __construct(
         private readonly HealthRegistry $registry,
         private readonly Dispatcher $events,
+        private readonly HealthSummary $summary,
     ) {}
 
     /**
@@ -63,6 +64,12 @@ final class HealthRunner
         $duration = (int) (microtime(true) * 1000) - $start;
 
         $this->persist($check, $result, $duration);
+
+        // The summary is cached for a few seconds so a wall of open tabs does
+        // not turn a diagnostic into load. A manual run is the one case where
+        // that delay would be visible as a lie — the button says "done" and the
+        // header still shows the old answer.
+        $this->summary->forget();
 
         if ($previousStatus !== null && $previousStatus !== $result->status) {
             $this->events->dispatch(new HealthCheckStatusChanged($check, $result, $previousStatus));
