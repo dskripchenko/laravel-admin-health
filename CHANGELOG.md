@@ -8,6 +8,14 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 Entries for releases published before this file existed were reconstructed from
 the tagged commit history.
 
+## [1.4.2] — 2026-10-02
+
+### Changed
+- `HealthOverviewWidget` requires `admin.system.health.view` by default. Since laravel-admin 1.34 enforces
+  widget permissions and serves plugin widgets on dashboards, the widget would
+  otherwise be visible to everyone who can open a dashboard. Override it with
+  `->permission()`.
+
 ## [1.4.1] — 2026-10-01
 
 ### Changed

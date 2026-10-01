@@ -22,6 +22,12 @@ use Dskripchenko\LaravelAdminHealth\HealthSummary;
  */
 class HealthOverviewWidget extends StatsOverviewWidget
 {
+    /**
+     * Seen only by those who may view what it summarises; a host can widen
+     * or narrow it with ->permission().
+     */
+    protected array|string|null $permission = 'admin.system.health.view';
+
     public function __construct()
     {
         // A title and a width the host has not asked for, but a widget that
