@@ -39,7 +39,7 @@ final class HealthResultResource extends Resource
 
     public static function label(): string
     {
-        return 'Health-checks';
+        return __('Health-checks');
     }
 
     public function columns(): array
@@ -54,7 +54,7 @@ final class HealthResultResource extends Resource
             ]),
             TableColumn::make('message')->search(),
             TableColumn::make('duration_ms')
-                ->label('Длит. (ms)')
+                ->label(__('Длит. (ms)'))
                 ->align('right')
                 ->sort(),
             TableColumn::make('ran_at')->sort()->asDateTime(),
@@ -64,11 +64,11 @@ final class HealthResultResource extends Resource
     public function filters(): array
     {
         return [
-            InputFilter::for('check_id')->label('Check ID'),
-            OptionsFilter::for('status')->label('Статус')->options([
-                'ok' => 'OK',
-                'warning' => 'Warning',
-                'failing' => 'Failing',
+            InputFilter::for('check_id')->label(__('Check ID')),
+            OptionsFilter::for('status')->label(__('Статус'))->options([
+                'ok' => __('В норме'),
+                'warning' => __('Замечания'),
+                'failing' => __('Не прошли'),
             ]),
         ];
     }

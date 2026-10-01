@@ -57,7 +57,7 @@ final class HealthRunner
             $result = $check->run();
         } catch (\Throwable $e) {
             $result = HealthResult::failing(
-                'Exception во время run(): '.$e->getMessage(),
+                __('Exception во время run(): :message', ['message' => $e->getMessage()]),
                 ['exception' => get_class($e)],
             );
         }

@@ -27,7 +27,7 @@ final class DiskSpaceCheck implements HealthCheck
 
     public function name(): string
     {
-        return 'Свободное место';
+        return __('Свободное место');
     }
 
     public function category(): string

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dskripchenko\LaravelAdminHealth;
 
+use Composer\InstalledVersions;
 use Dskripchenko\LaravelAdmin\Admin;
 use Dskripchenko\LaravelAdmin\Permission\ItemPermission;
 use Dskripchenko\LaravelAdmin\Plugin\AdminPlugin;
@@ -20,7 +21,7 @@ final class AdminHealthPlugin implements AdminPlugin
 
     public function version(): string
     {
-        return '0.1.0';
+        return InstalledVersions::getPrettyVersion('dskripchenko/laravel-admin-health') ?? 'dev';
     }
 
     public function register(): void
@@ -43,9 +44,9 @@ final class AdminHealthPlugin implements AdminPlugin
         $admin->widgets([HealthOverviewWidget::class]);
 
         $admin->permissions(
-            ItemPermission::group('Системные')
-                ->addPermission('admin.system.health.view', 'Health-check: просмотр')
-                ->addPermission('admin.system.health.run', 'Health-check: ручной запуск'),
+            ItemPermission::group(__('Системные'))
+                ->addPermission('admin.system.health.view', __('Health-check: просмотр'))
+                ->addPermission('admin.system.health.run', __('Health-check: ручной запуск')),
         );
     }
 }
