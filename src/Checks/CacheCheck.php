@@ -26,7 +26,7 @@ final class CacheCheck implements HealthCheck
 
     public function name(): string
     {
-        return 'Cache-хранилища';
+        return __('Cache-хранилища');
     }
 
     public function category(): string
@@ -75,13 +75,13 @@ final class CacheCheck implements HealthCheck
 
         if ($failures !== []) {
             return HealthResult::failing(
-                'Cache недоступен: '.implode(', ', array_keys($failures)),
+                __('Cache недоступен: :stores', ['stores' => implode(', ', array_keys($failures))]),
                 ['failures' => $failures, 'checked' => $checked],
             );
         }
 
         return HealthResult::ok(
-            'Все '.count($checked).' store(s) round-trip OK',
+            __('Все :count store(s) round-trip OK', ['count' => count($checked)]),
             ['checked' => $checked],
         );
     }

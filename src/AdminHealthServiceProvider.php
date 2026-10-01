@@ -17,7 +17,7 @@ use Illuminate\Support\ServiceProvider;
  * - registers the checks from config('admin-health.checks') in the
  *   HealthRegistry during the boot() phase
  * - registers AdminHealthPlugin in config('admin.plugins')
- * - wires in the migrations and the artisan commands
+ * - wires in the migrations, the JSON translations and the artisan commands
  */
 final class AdminHealthServiceProvider extends ServiceProvider
 {
@@ -29,6 +29,11 @@ final class AdminHealthServiceProvider extends ServiceProvider
 
         $this->app->singleton(HealthRegistry::class);
         $this->app->singleton(HealthRunner::class);
+
+        // Registered here rather than in boot(): the plugin's own boot runs
+        // __() on its labels, and the translator caches a locale's JSON lines
+        // on first use, so a path added later would never be read.
+        $this->loadJsonTranslationsFrom(__DIR__.'/../resources/lang');
 
         $this->registerAdminPlugin(AdminHealthPlugin::class);
     }

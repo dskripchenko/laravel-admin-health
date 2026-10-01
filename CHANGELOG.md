@@ -8,6 +8,26 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 Entries for releases published before this file existed were reconstructed from
 the tagged commit history.
 
+## [Unreleased]
+
+### Changed
+- `AdminHealthPlugin::version()` reports the installed package version from
+  Composer instead of a hardcoded `0.1.0` that had not matched any release
+  since the first one. Falls back to `dev` when the version cannot be resolved.
+- User-facing strings — the menu group, permission labels, the resource's
+  labels and filters, check names and result messages, the top-bar indicator
+  and the dashboard card — go through the translator. The Russian text stays the
+  translation key; messages that were built by concatenation now use
+  placeholders.
+- The status filter in the results list shows the same words as the dashboard
+  card instead of the raw `OK` / `Warning` / `Failing`.
+
+### Added
+- English translations (`resources/lang/en.json`), loaded by the service
+  provider as JSON translations.
+- A weekly scheduled CI run, so a breaking upstream release surfaces without
+  waiting for the next commit.
+
 ## [v1.4.0] - 2026-08-17
 
 ### Added

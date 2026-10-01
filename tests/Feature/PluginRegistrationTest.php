@@ -44,4 +44,22 @@ final class PluginRegistrationTest extends TestCase
         $output = $this->artisan('admin:health:cleanup');
         $output->assertSuccessful();
     }
+
+    public function test_version_is_not_hardcoded(): void
+    {
+        $version = (new AdminHealthPlugin)->version();
+        $this->assertNotSame('', $version);
+        $this->assertNotSame('0.1.0', $version);
+    }
+
+    public function test_english_translations_are_loaded(): void
+    {
+        app()->setLocale('en');
+        $this->assertSame('Healthy', __('В норме'));
+        $this->assertSame('3 checks failed', trans_choice(
+            ':count проверка не прошла|:count проверки не прошли|:count проверок не прошло',
+            3,
+            ['count' => 3],
+        ));
+    }
 }

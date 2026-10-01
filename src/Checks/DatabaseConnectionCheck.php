@@ -27,7 +27,7 @@ final class DatabaseConnectionCheck implements HealthCheck
 
     public function name(): string
     {
-        return 'Соединения с БД';
+        return __('Соединения с БД');
     }
 
     public function category(): string
@@ -66,13 +66,13 @@ final class DatabaseConnectionCheck implements HealthCheck
 
         if ($failures !== []) {
             return HealthResult::failing(
-                'Недоступны connection(s): '.implode(', ', array_keys($failures)),
+                __('Недоступны connection(s): :connections', ['connections' => implode(', ', array_keys($failures))]),
                 ['failures' => $failures, 'checked' => $checked],
             );
         }
 
         return HealthResult::ok(
-            'Все '.count($checked).' соединение(й) активны',
+            __('Все :count соединение(й) активны', ['count' => count($checked)]),
             ['checked' => $checked],
         );
     }
