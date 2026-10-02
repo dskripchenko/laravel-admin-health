@@ -39,32 +39,32 @@ final class HealthResultResource extends Resource
 
     public static function label(): string
     {
-        return __('Health-checks');
+        return __('Проверки состояния');
     }
 
     public function columns(): array
     {
         return [
-            TableColumn::make('id')->sort()->width('60px'),
-            TableColumn::make('check_id')->sort()->search()->copyable(),
-            TableColumn::make('status')->sort()->asBadge([
+            TableColumn::make('id')->label(__('ID'))->sort()->width('60px'),
+            TableColumn::make('check_id')->label(__('ID проверки'))->sort()->search()->copyable(),
+            TableColumn::make('status')->label(__('Статус'))->sort()->asBadge([
                 'ok' => 'success',
                 'warning' => 'warning',
                 'failing' => 'danger',
             ]),
-            TableColumn::make('message')->search(),
+            TableColumn::make('message')->label(__('Сообщение'))->search(),
             TableColumn::make('duration_ms')
                 ->label(__('Длит. (ms)'))
                 ->align('right')
                 ->sort(),
-            TableColumn::make('ran_at')->sort()->asDateTime(),
+            TableColumn::make('ran_at')->label(__('Запущено'))->sort()->asDateTime(),
         ];
     }
 
     public function filters(): array
     {
         return [
-            InputFilter::for('check_id')->label(__('Check ID')),
+            InputFilter::for('check_id')->label(__('ID проверки')),
             OptionsFilter::for('status')->label(__('Статус'))->options([
                 'ok' => __('В норме'),
                 'warning' => __('Замечания'),

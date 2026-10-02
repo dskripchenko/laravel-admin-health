@@ -33,7 +33,9 @@ class HealthOverviewWidget extends StatsOverviewWidget
         // A title and a width the host has not asked for, but a widget that
         // lands on someone else's dashboard has to introduce itself: the
         // numbers alone say nothing about what was counted.
-        $this->title(__('Health-checks'))->size(4);
+        // A source string: core translates the title per request, while a
+        // widget may be built once, in another locale.
+        $this->title('Проверки состояния')->size(4);
     }
 
     public static function slug(): string

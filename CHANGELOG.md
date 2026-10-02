@@ -8,6 +8,15 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 Entries for releases published before this file existed were reconstructed from
 the tagged commit history.
 
+## [Unreleased]
+
+### Fixed
+- The section, the overview widget's title ("Health-checks") and the results
+  table's headers ("Check ID", "Ran at", "Message"…) were English in a Russian
+  panel. They are Russian source strings now, translated per request
+  ("Проверки состояния" / "Health checks"); the widget passes its title
+  untranslated so core translates it in the reader's locale.
+
 ## [1.4.3] — 2026-10-02
 
 ### Fixed
