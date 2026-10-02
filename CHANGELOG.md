@@ -8,6 +8,19 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 Entries for releases published before this file existed were reconstructed from
 the tagged commit history.
 
+## [Unreleased]
+
+### Fixed
+- The permission group and its labels were registered as `__()` results,
+  translated once at boot: the role matrix showed them in the boot locale
+  whatever the request's language, and apart from the "Системные" group of the
+  other packs when those register the source string. The group and the labels
+  are now passed as source strings, which core translates per request.
+
+### Changed
+- Requires `dskripchenko/laravel-admin` ^1.33, the first core to translate
+  permission groups and labels per request.
+
 ## [1.4.2] — 2026-10-02
 
 ### Changed
