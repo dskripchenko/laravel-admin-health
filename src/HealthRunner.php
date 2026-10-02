@@ -57,8 +57,9 @@ final class HealthRunner
             $result = $check->run();
         } catch (\Throwable $e) {
             $result = HealthResult::failing(
-                __('Exception во время run(): :message', ['message' => $e->getMessage()]),
+                'Exception во время run(): :message',
                 ['exception' => get_class($e)],
+                ['message' => $e->getMessage()],
             );
         }
         $duration = (int) (microtime(true) * 1000) - $start;
@@ -93,11 +94,17 @@ final class HealthRunner
 
     private function persist(HealthCheck $check, HealthResult $result, int $durationMs): void
     {
+        // The message is kept as a source string; its placeholders ride along
+        // in meta, so a reader translates it in its own locale.
+        $meta = $result->replace === []
+            ? $result->meta
+            : [...$result->meta, HealthResultRecord::REPLACE_KEY => $result->replace];
+
         HealthResultRecord::query()->create([
             'check_id' => $check->id(),
             'status' => $result->status,
             'message' => $result->message,
-            'meta' => $result->meta,
+            'meta' => $meta,
             'duration_ms' => $durationMs,
             'ran_at' => Carbon::now(),
         ]);

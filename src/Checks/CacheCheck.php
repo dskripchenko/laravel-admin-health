@@ -75,14 +75,16 @@ final class CacheCheck implements HealthCheck
 
         if ($failures !== []) {
             return HealthResult::failing(
-                __('Cache недоступен: :stores', ['stores' => implode(', ', array_keys($failures))]),
+                'Cache недоступен: :stores',
                 ['failures' => $failures, 'checked' => $checked],
+                ['stores' => implode(', ', array_keys($failures))],
             );
         }
 
         return HealthResult::ok(
-            __('Все :count store(s) round-trip OK', ['count' => count($checked)]),
+            'Все :count store(s) round-trip OK',
             ['checked' => $checked],
+            ['count' => count($checked)],
         );
     }
 }

@@ -8,6 +8,37 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 Entries for releases published before this file existed were reconstructed from
 the tagged commit history.
 
+## [Unreleased]
+
+### Added
+- **Run checks now**: a header-menu action of the results section, for users
+  with `admin.system.health.run` — the permission the pack has always
+  registered, with nothing behind it. It runs every check, like
+  `admin:health:run`, and reports how many passed, warned and failed.
+- `HealthResult` takes the message's placeholders (`$replace`, the last
+  argument of the constructor and of `ok()`/`warning()`/`failing()`), and
+  `text()` returns the message translated into the current locale.
+
+### Fixed
+- Result messages were translated when the check ran and stored that way, so
+  the history, the top-bar indicator and the summary showed them in the
+  scheduler's language whatever the reader's ("Queues healthy (11 total
+  pending, 8 failed)" in a Russian panel). The runner now stores the source
+  string with its placeholders (under a reserved key of `meta`, no migration),
+  and the results list, the record view, `HealthSummary`, the indicator and
+  `admin:health:run` translate it in their own locale. Rows written by earlier
+  versions are shown as they were stored.
+- The disk space check reported "Disk space OK" as an English literal; it is a
+  source string now.
+- The status column showed the raw values `ok`, `warning`, `failing`; the
+  badges carry the same captions as the status filter, translated per request.
+
+### Changed
+- Requires `dskripchenko/laravel-admin` ^1.34, the first version that offers a
+  resource action needing no selected rows in the list's header menu.
+- `HealthResult::$message` of the built-in checks is the untranslated source
+  string; code that showed it to people should call `text()`.
+
 ## [1.4.4] — 2026-10-02
 
 ### Fixed
