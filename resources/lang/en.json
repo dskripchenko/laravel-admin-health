@@ -5,12 +5,10 @@
     ":ok из :total в норме, :never ни разу не запускалась": ":ok of :total healthy, :never never run",
     "Cache-хранилища": "Cache stores",
     "Cache недоступен: :stores": "Cache unavailable: :stores",
-    "Check ID": "Check ID",
     "Exception в check'е: :message": "Exception in the check: :message",
     "Exception во время run(): :message": "Exception during run(): :message",
     "Health-check: просмотр": "Health checks: view",
     "Health-check: ручной запуск": "Health checks: run manually",
-    "Health-checks": "Health checks",
     "В норме": "Healthy",
     "Все :count store(s) round-trip OK": "All :count store(s) round-trip OK",
     "Все :count соединение(й) активны": "All :count connection(s) are up",
@@ -28,5 +26,9 @@
     "Свободное место": "Free disk space",
     "Системные": "System",
     "Соединения с БД": "Database connections",
-    "Статус": "Status"
+    "Статус": "Status",
+    "Проверки состояния": "Health checks",
+    "ID проверки": "Check ID",
+    "Сообщение": "Message",
+    "Запущено": "Ran at"
 }
