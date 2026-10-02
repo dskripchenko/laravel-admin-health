@@ -30,5 +30,8 @@
     "Проверки состояния": "Health checks",
     "ID проверки": "Check ID",
     "Сообщение": "Message",
-    "Запущено": "Ran at"
+    "Запущено": "Ran at",
+    "Свободного места достаточно": "Disk space OK",
+    "Запустить проверки": "Run checks now",
+    "Проверки выполнены: :ok в норме, :warning с замечаниями, :failing не прошли": "Checks done: :ok healthy, :warning with warnings, :failing failing"
 }

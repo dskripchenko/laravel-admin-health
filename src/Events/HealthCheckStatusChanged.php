@@ -15,7 +15,7 @@ use Illuminate\Foundation\Events\Dispatchable;
  *
  *     Event::listen(HealthCheckStatusChanged::class, function ($e) {
  *         if ($e->isFailing()) {
- *             SlackNotification::send("🚨 {$e->check->name()}: {$e->result->message}");
+ *             SlackNotification::send("🚨 {$e->check->name()}: {$e->result->text()}");
  *         }
  *     });
  */

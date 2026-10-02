@@ -94,6 +94,6 @@ final class DiskSpaceCheck implements HealthCheck
             return HealthResult::warning(implode('; ', $messages), $meta);
         }
 
-        return HealthResult::ok('Disk space OK', $meta);
+        return HealthResult::ok('Свободного места достаточно', $meta);
     }
 }

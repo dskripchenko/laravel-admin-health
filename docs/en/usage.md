@@ -18,7 +18,8 @@ The pack has three surfaces, and only one of them asks to be visited:
   only when it happens — how many checks have never run at all, which almost
   always means the scheduler was never wired up.
 - **The results section**, the full history, for when one of those numbers is
-  not zero.
+  not zero. A user with `admin.system.health.run` also gets **Run checks now**
+  in its header menu: every check runs at once, and the toast says how it went.
 
 Both the indicator and the widget are registered by the plugin. Nothing has to
 be placed on a dashboard by hand; a host that wants the widget somewhere
@@ -92,7 +93,7 @@ final class StripeApiCheck implements HealthCheck
 
             return HealthResult::ok('Ответ получен');
         } catch (\Throwable $e) {
-            return HealthResult::failing($e->getMessage());
+            return HealthResult::failing('Stripe не отвечает: :message', [], ['message' => $e->getMessage()]);
         }
     }
 }
@@ -110,6 +111,29 @@ to its constructor:
 
 A check that throws is not a crash: the runner records it as `failing` with the
 exception's class in the result's meta.
+
+### Messages in the reader's language
+
+A check runs in the scheduler's locale, and its result is read later by people
+who may use another one. So a result carries its message untranslated: a
+source string (a key of your JSON translations) plus its placeholders, the
+arguments `__()` takes:
+
+```php
+HealthResult::warning(
+    'Очередь :queue растёт: :size задач',  // the key, translated when read
+    ['size' => $size],                      // meta: kept as it is
+    ['queue' => 'mail', 'size' => $size],   // the placeholders
+);
+```
+
+The runner stores both, and everything that shows a message translates it in
+its own locale: the results list, the top-bar indicator, `HealthSummary`, the
+`admin:health:run` output. In code, `$result->text()` is the translated
+message; `$result->message` is the source. A string with no translation is
+shown as it is, so a message that was already translated, or is not meant to
+be, still works — it just stays in one language. Rows written by earlier
+versions hold finished strings and are shown as they were stored.
 
 ## Three states, not two
 
@@ -131,7 +155,8 @@ $summary->latest();   // per check id: status, message, ran_at — null when nev
 ```
 
 It is cached for a few seconds, since the top-bar indicator polls once a minute
-per open tab. The runner drops that cache after every run, so a manual "run the
+per open tab; the messages it returns are translated on every call, in the
+current locale. The runner drops that cache after every run, so a manual "run the
 checks" never leaves the header showing yesterday's answer.
 
 `unknown` means nobody has looked — either nothing is registered, or nothing has

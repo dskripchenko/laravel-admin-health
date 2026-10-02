@@ -40,7 +40,7 @@ final class ClosureCheckTest extends TestCase
         });
         $r = $check->run();
         $this->assertTrue($r->isFailing());
-        $this->assertStringContainsString('boom', $r->message);
+        $this->assertStringContainsString('boom', $r->text());
         $this->assertSame(RuntimeException::class, $r->meta['exception']);
     }
 

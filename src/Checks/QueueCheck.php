@@ -66,7 +66,9 @@ final class QueueCheck implements HealthCheck
                 $size = Queue::size($queue);
             } catch (Throwable $e) {
                 return HealthResult::failing(
-                    __('Не удалось прочитать длину очереди :queue: :message', ['queue' => $queue, 'message' => $e->getMessage()]),
+                    'Не удалось прочитать длину очереди :queue: :message',
+                    [],
+                    ['queue' => $queue, 'message' => $e->getMessage()],
                 );
             }
             $depths[$queue] = $size;
@@ -102,8 +104,9 @@ final class QueueCheck implements HealthCheck
         }
 
         return HealthResult::ok(
-            __('Очереди в норме (:pending total pending, :failed failed)', ['pending' => array_sum($depths), 'failed' => $failedCount]),
+            'Очереди в норме (:pending total pending, :failed failed)',
             $meta,
+            ['pending' => array_sum($depths), 'failed' => $failedCount],
         );
     }
 }

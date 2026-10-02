@@ -36,11 +36,37 @@ final class HealthSummary
      * run yet" is a state worth showing — the scheduler may not be wired up at
      * all, which is exactly the failure a health pack ought to catch.
      *
+     * The message is translated into the current locale on every call: the
+     * cache holds the source string and its placeholders, not one language.
+     *
      * @return array<string, array{status: string, message: string|null, ran_at: string|null}|null>
      */
     public function latest(): array
     {
-        /** @var array<string, array{status: string, message: string|null, ran_at: string|null}|null> $summary */
+        $latest = [];
+        foreach ($this->cached() as $id => $result) {
+            if ($result === null) {
+                $latest[$id] = null;
+
+                continue;
+            }
+
+            $latest[$id] = [
+                'status' => $result['status'],
+                'message' => $result['message'] === null ? null : HealthResult::translate($result['message'], $result['replace']),
+                'ran_at' => $result['ran_at'],
+            ];
+        }
+
+        return $latest;
+    }
+
+    /**
+     * @return array<string, array{status: string, message: string|null, replace: array<string, mixed>, ran_at: string|null}|null>
+     */
+    private function cached(): array
+    {
+        /** @var array<string, array{status: string, message: string|null, replace: array<string, mixed>, ran_at: string|null}|null> $summary */
         $summary = Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function (): array {
             $ids = $this->registry->ids();
             $latest = array_fill_keys($ids, null);
@@ -59,7 +85,7 @@ final class HealthSummary
                 ->whereIn('check_id', $ids)
                 ->orderByDesc('ran_at')
                 ->orderByDesc('id')
-                ->get(['check_id', 'status', 'message', 'ran_at']);
+                ->get(['check_id', 'status', 'message', 'meta', 'ran_at']);
 
             foreach ($rows as $row) {
                 if (($latest[$row->check_id] ?? null) !== null) {
@@ -68,7 +94,8 @@ final class HealthSummary
 
                 $latest[$row->check_id] = [
                     'status' => $row->status,
-                    'message' => $row->message,
+                    'message' => $row->messageSource(),
+                    'replace' => $row->messageReplace(),
                     'ran_at' => $row->ran_at->toIso8601String(),
                 ];
             }

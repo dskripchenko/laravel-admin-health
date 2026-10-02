@@ -66,14 +66,16 @@ final class DatabaseConnectionCheck implements HealthCheck
 
         if ($failures !== []) {
             return HealthResult::failing(
-                __('Недоступны connection(s): :connections', ['connections' => implode(', ', array_keys($failures))]),
+                'Недоступны connection(s): :connections',
                 ['failures' => $failures, 'checked' => $checked],
+                ['connections' => implode(', ', array_keys($failures))],
             );
         }
 
         return HealthResult::ok(
-            __('Все :count соединение(й) активны', ['count' => count($checked)]),
+            'Все :count соединение(й) активны',
             ['checked' => $checked],
+            ['count' => count($checked)],
         );
     }
 }

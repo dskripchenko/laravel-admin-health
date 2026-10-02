@@ -36,7 +36,7 @@ final class RunHealthChecksCommand extends Command
         $hasFail = false;
         foreach ($report as $row) {
             $status = $row['result']->status;
-            $line = "[$status] {$row['check']->id()} ({$row['duration_ms']}ms): {$row['result']->message}";
+            $line = "[$status] {$row['check']->id()} ({$row['duration_ms']}ms): {$row['result']->text()}";
             if ($status === 'ok') {
                 $this->info($line);
             } elseif ($status === 'warning') {

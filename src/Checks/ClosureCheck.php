@@ -66,8 +66,9 @@ final class ClosureCheck implements HealthCheck
             $result = ($this->closure)();
         } catch (Throwable $e) {
             return HealthResult::failing(
-                __('Exception в check\'е: :message', ['message' => $e->getMessage()]),
+                'Exception в check\'е: :message',
                 ['exception' => get_class($e)],
+                ['message' => $e->getMessage()],
             );
         }
 
