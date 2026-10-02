@@ -43,10 +43,14 @@ final class AdminHealthPlugin implements AdminPlugin
 
         $admin->widgets([HealthOverviewWidget::class]);
 
+        // Source strings, not __() results: the group is registered once at
+        // boot, and core translates it in the locale of each request. A name
+        // translated here would be frozen in the boot locale and split from
+        // the system group the other packs share.
         $admin->permissions(
-            ItemPermission::group(__('Системные'))
-                ->addPermission('admin.system.health.view', __('Health-check: просмотр'))
-                ->addPermission('admin.system.health.run', __('Health-check: ручной запуск')),
+            ItemPermission::group('Системные')
+                ->addPermission('admin.system.health.view', 'Health-check: просмотр')
+                ->addPermission('admin.system.health.run', 'Health-check: ручной запуск'),
         );
     }
 }

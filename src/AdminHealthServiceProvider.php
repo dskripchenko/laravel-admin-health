@@ -30,9 +30,10 @@ final class AdminHealthServiceProvider extends ServiceProvider
         $this->app->singleton(HealthRegistry::class);
         $this->app->singleton(HealthRunner::class);
 
-        // Registered here rather than in boot(): the plugin's own boot runs
-        // __() on its labels, and the translator caches a locale's JSON lines
-        // on first use, so a path added later would never be read.
+        // Registered here rather than in boot(): the translator caches a
+        // locale's JSON lines on first use, and anything that translates
+        // while the application boots would load them before this provider's
+        // boot() could add the path, so it would never be read.
         $this->loadJsonTranslationsFrom(__DIR__.'/../resources/lang');
 
         $this->registerAdminPlugin(AdminHealthPlugin::class);
