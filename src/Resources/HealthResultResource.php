@@ -46,6 +46,15 @@ final class HealthResultResource extends Resource
         return __('Проверки состояния');
     }
 
+    /**
+     * One record's name, for the panel's titles, confirmations and toasts
+     * ("Create check result"). A core without singularLabel() ignores it.
+     */
+    public static function singularLabel(): string
+    {
+        return __('результат проверки');
+    }
+
     public function columns(): array
     {
         return [
