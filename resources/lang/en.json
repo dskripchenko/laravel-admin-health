@@ -33,5 +33,6 @@
     "Запущено": "Ran at",
     "Свободного места достаточно": "Disk space OK",
     "Запустить проверки": "Run checks now",
-    "Проверки выполнены: :ok в норме, :warning с замечаниями, :failing не прошли": "Checks done: :ok healthy, :warning with warnings, :failing failing"
+    "Проверки выполнены: :ok в норме, :warning с замечаниями, :failing не прошли": "Checks done: :ok healthy, :warning with warnings, :failing failing",
+    "результат проверки": "check result"
 }
